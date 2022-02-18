@@ -50,6 +50,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         foodName.textContent = element.name;
         foodPrice.textContent = element.price + "€";
         addToCartButton.id = "btn-" + element.id;
+        addToCartButton.dataset.id = element.id;
 
         addToCartButton.addEventListener('click', () =>{
             if(addToCartButton.className == "addCartButton"){
@@ -58,7 +59,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             }else{
                 totalCuenta -= parseFloat(element.price);
             }
-            updateCard(addToCartButton.id, element.id);
+            updateCard(addToCartButton.id);
         });
 
         foodItem.append(foodName, foodPrice, addToCartButton);
@@ -111,10 +112,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
             divCarta.append(btnPay);
     }
 
-    function updateCard(btnId, id){
+    function updateCard(btnId){
         let btnOrder = document.getElementById(btnId);
         let orderTable = document.getElementById('orderId');
-
+        let id = btnOrder.dataset.id;
         orderTable.innerHTML = "";
         
         if(btnOrder.className == "addCartButton"){
